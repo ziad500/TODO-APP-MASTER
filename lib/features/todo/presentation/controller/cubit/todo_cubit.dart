@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/core/status.dart';
 import 'package:todo_app/features/todo/domain/entities/todo_model.dart';
 import 'package:todo_app/features/todo/domain/use_cases/add_todo_usecase.dart';
 import 'package:todo_app/features/todo/domain/use_cases/delete_all_Todos_usecase.dart';
@@ -23,10 +24,10 @@ class TodoCubit extends Cubit<TodoState> {
   Future addTodo(TodoModel todoModel) async {
     emit(AddTodoLoadingState());
     await addTodosUsecase.execude(todoModel).then((value) => value.fold((l) {
-          print(l.message);
           emit(AddTodoErrorState(l.message));
         }, (r) {
-          getAllTodos();
+          allTodos.insert(0, r);
+          unDoneTodos.insert(0, r);
           emit(AddTodoSuccessState());
         }));
   }
@@ -34,10 +35,8 @@ class TodoCubit extends Cubit<TodoState> {
   Future deleteAllTodos() async {
     emit(AddTodoLoadingState());
     await deleteALLTodosUsecase.execude().then((value) => value.fold((l) {
-          print(l.message);
           emit(AddTodoErrorState(l.message));
         }, (r) {
-          print("success");
           emit(AddTodoSuccessState());
         }));
   }
@@ -47,8 +46,21 @@ class TodoCubit extends Cubit<TodoState> {
     await editTodosUsecase.execude(todoModel).then((value) => value.fold((l) {
           emit(EditTodoErrorState(l.message));
         }, (r) {
+          editTaskImpl(todoModel, r.status);
           emit(EditTodoSuccessState());
         }));
+  }
+
+  void editTaskImpl(TodoModel todoModel, String newStatus) {
+    if (newStatus == Status.done) {
+      unDoneTodos.removeWhere((element) => element.id == todoModel.id);
+      doneTodos.insert(0, todoModel);
+    } else {
+      doneTodos.removeWhere((element) => element.id == todoModel.id);
+      unDoneTodos.insert(0, todoModel);
+    }
+    int index = allTodos.indexWhere((element) => element.id == todoModel.id);
+    allTodos[index].status = newStatus;
   }
 
   Future deleteTodo(String todoId) async {
@@ -60,14 +72,19 @@ class TodoCubit extends Cubit<TodoState> {
         }));
   }
 
+  List<TodoModel> allTodos = [];
+  List<TodoModel> doneTodos = [];
+  List<TodoModel> unDoneTodos = [];
+
   Future getAllTodos() async {
     emit(GetAllTodosLoadingState());
     await getTodosUsecase.execude().then((value) => value.fold((l) {
           emit(GetAllTodosErrorState(l.message));
         }, (r) {
           if (r.isNotEmpty) {
-            print(r[0].id);
-            print(r[0].title);
+            allTodos = r.reversed.toList();
+            doneTodos = r.reversed.where((element) => element.status == Status.done).toList();
+            unDoneTodos = r.reversed.where((element) => element.status == Status.unDone).toList();
           }
 
           emit(GetAllTodosSuccessState());
