@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/common/default_form_field.dart';
 import 'package:todo_app/common/main_button.dart';
 import 'package:todo_app/common/show_toast.dart';
@@ -44,6 +45,9 @@ class BottomSheetWidget extends StatelessWidget {
                 contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 hint: "Description",
                 validator: (value) {
+                  if (value.isEmpty) {
+                    return "Please enter description";
+                  }
                   return null;
                 },
               ),
@@ -65,7 +69,7 @@ class BottomSheetWidget extends StatelessWidget {
                   }
                 },
                 child: MainButton(
-                  height: 50,
+                  height: 30.h,
                   title: "Done",
                   icon: Icons.done,
                   onPressed: () {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/common/main_button.dart';
 import 'package:todo_app/features/todo/presentation/controller/cubit/todo_cubit.dart';
 import 'package:todo_app/features/todo/presentation/screens/search_screen/view/search_screen.dart';
@@ -11,13 +12,13 @@ class TodoSearchBar extends StatelessWidget {
     return MainButton(
       title: "Search",
       icon: Icons.search,
-      height: 40,
+      height: 35.h,
       onPressed: () {
         TodoCubit.get(context).searchList = TodoCubit.get(context).allTodos;
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => SearchScreen(),
+              builder: (context) => const SearchScreen(),
             ));
       },
     );
