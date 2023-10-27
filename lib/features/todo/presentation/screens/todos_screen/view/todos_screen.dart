@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/common/main_button.dart';
-import 'package:todo_app/features/todo/presentation/components/add_todo_button.dart';
-import 'package:todo_app/features/todo/presentation/components/views/done_todos_view.dart';
-import 'package:todo_app/features/todo/presentation/components/todo_appbar.dart';
-import 'package:todo_app/features/todo/presentation/components/todo_search_bar.dart';
-import 'package:todo_app/features/todo/presentation/components/todo_tab_bar.dart';
-import 'package:todo_app/features/todo/presentation/components/views/all_todos_view.dart';
-import 'package:todo_app/features/todo/presentation/components/views/undone_todos_view.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/add_todo_button.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/views/done_todos_view.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/todo_appbar.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/todo_search_bar.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/todo_tab_bar.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/views/all_todos_view.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/views/undone_todos_view.dart';
 
 class TodoScreen extends StatelessWidget {
   const TodoScreen({super.key});

@@ -90,4 +90,14 @@ class TodoCubit extends Cubit<TodoState> {
           emit(GetAllTodosSuccessState());
         }));
   }
+
+  List<TodoModel> searchList = [];
+
+  void search(String searchTerm) {
+    searchList = [];
+    searchList = allTodos
+        .where((todo) => todo.title.toLowerCase().startsWith(searchTerm.toLowerCase()))
+        .toList();
+    emit(GetSearchList());
+  }
 }

@@ -39,8 +39,12 @@ class TodoItem extends StatelessWidget {
                 Expanded(
                   child: Text(
                     todoModel.title,
-                    style: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(
+                        decoration:
+                            todoModel.status == Status.done ? TextDecoration.lineThrough : null,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -65,7 +69,11 @@ class TodoItem extends StatelessWidget {
                 Expanded(
                   child: Text(
                     todoModel.description,
-                    style: const TextStyle(color: Colors.grey, fontSize: 14),
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14,
+                        decoration:
+                            todoModel.status == Status.done ? TextDecoration.lineThrough : null),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

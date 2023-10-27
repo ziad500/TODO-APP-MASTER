@@ -39,3 +39,5 @@ final class GetAllTodosErrorState extends TodoState {
   final String error;
   GetAllTodosErrorState(this.error);
 }
+
+final class GetSearchList extends TodoState {}

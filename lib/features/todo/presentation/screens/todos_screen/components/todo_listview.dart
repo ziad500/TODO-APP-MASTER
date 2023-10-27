@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/features/todo/domain/entities/todo_model.dart';
-import 'package:todo_app/features/todo/presentation/components/todo_item.dart';
+import 'package:todo_app/features/todo/presentation/screens/todos_screen/components/todo_item.dart';
 
 class TodoListview extends StatelessWidget {
   const TodoListview({super.key, required this.todos});
