@@ -37,7 +37,6 @@ class TodoDatabaseHelper {
   }
 
   Future<TodoModel> addTodo(TodoModel todoModel) async {
-    print(todoModel.toMap());
     final db = await instance.database;
 
     final id = await db.insert(tableName, todoModel.toMap());
