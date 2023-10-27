@@ -16,7 +16,7 @@ class TodoModel {
 
   Map<String, dynamic> toMap() {
     return {
-      TodoFields.id: null,
+      TodoFields.id: id,
       TodoFields.title: title,
       TodoFields.description: description,
       TodoFields.status: status,
