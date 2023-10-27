@@ -69,7 +69,7 @@ class BottomSheetWidget extends StatelessWidget {
                   }
                 },
                 child: MainButton(
-                  height: 40.h,
+                  height: 35.h,
                   title: "Done",
                   icon: Icons.done,
                   onPressed: () {
